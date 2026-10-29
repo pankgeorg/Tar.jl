@@ -687,7 +687,7 @@ function read_standard_header(
         check_checksum_field(buf)
     catch err
         if err isa ErrorException
-            m = match(r"^(.*?)\s*\[header block data\]"s, String(err.msg)::String)::RegexMatch
+            m = match(r"^(.*?)\s*\[header block data\]"s, err.msg::String)::RegexMatch
             msg = something(m.captures[1])
             msg = "This does not appear to be a TAR file/stream — $msg. Note: Tar.jl does not handle decompression; if the tarball is compressed you must use an external command like `gzcat` or package like CodecZlib.jl to decompress it. See the README file for examples."
             err = ErrorException(msg)
